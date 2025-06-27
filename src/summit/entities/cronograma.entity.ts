@@ -8,6 +8,7 @@ import {
 } from 'typeorm';
 import { Fase } from './fases.entity';
 import { CursoEvaluar } from './curso-evaluar.entity';
+import { Ficha } from './ficha.entity';
 
 @Entity('cronograma')
 export class Cronograma {
@@ -28,4 +29,7 @@ export class Cronograma {
 
   @OneToMany(() => CursoEvaluar, (cursoEvaluar) => cursoEvaluar.cronograma)
   cursosEvaluar: CursoEvaluar[];
+
+  @OneToMany(() => Ficha, ficha => ficha.cronograma)
+  fichas:Ficha[]
 }

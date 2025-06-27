@@ -13,6 +13,7 @@ import { Nivel } from './nivel.entity';
 import { Grupo } from 'src/summit/entities/grupo.entity';
 import { CursoEvaluar } from 'src/summit/entities/curso-evaluar.entity';
 import { Proyecto } from 'src/summit/entities/proyecto.entity';
+import { Ficha } from 'src/summit/entities/ficha.entity';
 
 @Entity('grado')
 export class Grado {
@@ -43,4 +44,7 @@ export class Grado {
 
   @OneToMany(() => Proyecto, (proyecto) => proyecto.grado)
   proyectos: Proyecto[];
+
+  @OneToMany(() => Ficha, (ficha) => ficha.nivel)
+  fichas: Ficha[];
 }

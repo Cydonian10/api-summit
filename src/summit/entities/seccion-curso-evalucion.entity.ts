@@ -19,7 +19,7 @@ export class SeccionCursoEvaluacion {
   @Column({ nullable: true })
   nota: number | null;
 
-  @ManyToOne(() => Seccion)
+  @ManyToOne(() => Seccion, (seccion) => seccion.seccionesCursosEvaluaciones)
   seccion: Seccion;
 
   @ManyToOne(() => CursoEvaluar, (ce) => ce.seccionesCursoEvaluacion)

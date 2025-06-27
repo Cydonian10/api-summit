@@ -12,6 +12,7 @@ import { Cronograma } from './cronograma.entity';
 import { Curso } from 'src/malla-curricular/entitties/curso.entity';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { SeccionCursoEvaluacion } from './seccion-curso-evalucion.entity';
+import { AlumnoEvaluar } from './alumno-evaluar.entity';
 
 @Entity('curso_evaluar')
 export class CursoEvaluar {
@@ -20,9 +21,6 @@ export class CursoEvaluar {
 
   @Column()
   gradoId: number;
-
-  @Column()
-  seccionId: number;
 
   @Column()
   cronogramaId: number;
@@ -36,10 +34,6 @@ export class CursoEvaluar {
   @ManyToOne(() => Grado, (grado) => grado.cursosEvaluar)
   @JoinColumn({ name: 'gradoId' })
   grado: Grado;
-
-  @ManyToOne(() => Seccion, (seccion) => seccion.cursosEvaluar)
-  @JoinColumn({ name: 'seccionId' })
-  seccion: Seccion;
 
   @ManyToOne(() => Cronograma, (cronograma) => cronograma)
   @JoinColumn({ name: 'cronogramaId' })
@@ -55,4 +49,7 @@ export class CursoEvaluar {
 
   @OneToMany(() => SeccionCursoEvaluacion, (sce) => sce.cursoEvaluar)
   seccionesCursoEvaluacion: SeccionCursoEvaluacion;
+
+  @OneToMany(() => AlumnoEvaluar, (alumnoEvaluar) => alumnoEvaluar.cursoEvaluar)
+  alumnosEvaluar: AlumnoEvaluar[];
 }

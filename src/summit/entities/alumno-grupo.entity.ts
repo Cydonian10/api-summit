@@ -1,6 +1,13 @@
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Grupo } from './grupo.entity';
+import { AlumnoEvaluar } from './alumno-evaluar.entity';
 
 export enum TipoAlumno {
   normal = 'NORMAL',
@@ -24,11 +31,9 @@ export class AlumnoGrupo {
   @ManyToOne(() => Grupo, (grupo) => grupo.alumnos, { onDelete: 'CASCADE' })
   grupo: Grupo;
 
-  @Column({
-    type: 'enum',
-    enum: TipoAlumno,
-    enumName: 'tipo_alumno_enum',
-    name: 'tipo_alumno',
-  })
+  @Column()
   tipoAlumno: TipoAlumno;
+
+  @OneToMany(() => AlumnoEvaluar, (alumnoEvaluar) => alumnoEvaluar.alumnoGrupo)
+  alumnosEvaluar: AlumnoEvaluar[];
 }
