@@ -14,6 +14,9 @@ export class Usuario {
   @Column()
   nickname: string;
 
+  @Column()
+  password: string;
+
   @OneToMany(() => AlumnoGrupo, (ag) => ag.alumno)
   grupos: AlumnoGrupo[];
 

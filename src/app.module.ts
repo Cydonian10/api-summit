@@ -1,14 +1,10 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { UsuariosController } from './usuarios/usuarios.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Usuario } from './usuarios/entities/usuario.entity';
-import { Nivel } from './malla-curricular/entitties/nivel.entity';
-import { Grado } from './malla-curricular/entitties/grado.entity';
-import { Seccion } from './malla-curricular/entitties/seccion.entity';
 import { glob } from 'glob';
 import { join } from 'path';
+import { UsuariosService } from './usuarios/services/usuario.service';
+import { UsuariosController } from './usuarios/controllers/usuarios.controllers';
+import { JwtModule } from '@nestjs/jwt';
 
 const entityFiles = glob.sync(join(__dirname, '**', '*.entity.{ts,js}'));
 const entities = entityFiles.map((file) => require(file));
@@ -25,13 +21,17 @@ const extractedEntities = entities.map((mod) => Object.values(mod)).flat();
       database: 'summit_db',
       autoLoadEntities: true,
       synchronize: true,
-      //      entities: [__dirname + '/../**/*.entity.{js,ts}'],
       ssl: false,
-      dropSchema: true,
+      dropSchema: false,
     }),
     TypeOrmModule.forFeature(extractedEntities),
+    JwtModule.register({
+      global: true,
+      secret: 'kasdjfñaksdjfñaksdjfñalksdjf',
+      signOptions: { expiresIn: '2d' },
+    }),
   ],
-  controllers: [AppController, UsuariosController],
-  providers: [AppService],
+  controllers: [UsuariosController],
+  providers: [UsuariosService],
 })
 export class AppModule {}
