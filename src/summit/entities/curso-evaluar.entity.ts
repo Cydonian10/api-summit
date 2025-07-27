@@ -14,7 +14,7 @@ import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { SeccionCursoEvaluacion } from './seccion-curso-evalucion.entity';
 import { AlumnoEvaluar } from './alumno-evaluar.entity';
 
-@Entity('curso_evaluar')
+@Entity({ schema: 'summit', name: 'curso_evaluar' })
 export class CursoEvaluar {
   @PrimaryGeneratedColumn()
   id: number;

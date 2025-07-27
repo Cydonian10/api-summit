@@ -10,7 +10,7 @@ import { Fase } from './fases.entity';
 import { CursoEvaluar } from './curso-evaluar.entity';
 import { Ficha } from './ficha.entity';
 
-@Entity('cronograma')
+@Entity({ schema: 'summit', name: 'cronograma' })
 export class Cronograma {
   @PrimaryGeneratedColumn()
   id: number;
@@ -30,6 +30,6 @@ export class Cronograma {
   @OneToMany(() => CursoEvaluar, (cursoEvaluar) => cursoEvaluar.cronograma)
   cursosEvaluar: CursoEvaluar[];
 
-  @OneToMany(() => Ficha, ficha => ficha.cronograma)
-  fichas:Ficha[]
+  @OneToMany(() => Ficha, (ficha) => ficha.cronograma)
+  fichas: Ficha[];
 }

@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { CursoEvaluar } from './curso-evaluar.entity';
 import { Seccion } from 'src/malla-curricular/entitties/seccion.entity';
 
-@Entity('seccion_curso_evaluacion')
+@Entity('seccion_curso_evaluacion', { schema: 'summit' })
 export class SeccionCursoEvaluacion {
   @PrimaryGeneratedColumn()
   id: number;

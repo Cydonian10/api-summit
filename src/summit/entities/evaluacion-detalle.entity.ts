@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { FichaCriterio } from './ficha-criterio.entity';
 import { Evaluacion } from './evaluacion.entity';
 
-@Entity('evaluacion_detalle')
+@Entity({ schema: 'summit', name: 'evaluacion_detalle' })
 export class EvaluacionDetalle {
   @PrimaryGeneratedColumn()
   id: number;

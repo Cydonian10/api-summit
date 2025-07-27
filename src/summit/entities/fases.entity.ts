@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Cronograma } from './cronograma.entity';
 
-@Entity('fase')
+@Entity({ schema: 'summit', name: 'fase' })
 export class Fase {
   @PrimaryGeneratedColumn()
   id: number;

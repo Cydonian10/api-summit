@@ -1,5 +1,12 @@
 import { CursoEvaluar } from 'src/summit/entities/curso-evaluar.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Grado } from './grado.entity';
 
 @Entity('curso')
 export class Curso {
@@ -11,4 +18,7 @@ export class Curso {
 
   @OneToMany(() => CursoEvaluar, (cursoEvaluar) => cursoEvaluar.curso)
   cursosEvaluar: CursoEvaluar[];
+
+  @ManyToMany(() => Grado, (grado) => grado.cursos)
+  grados: Grado[];
 }

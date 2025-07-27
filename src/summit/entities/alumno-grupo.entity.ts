@@ -14,7 +14,7 @@ export enum TipoAlumno {
   especial = 'ESPECIAL',
 }
 
-@Entity('alumno_grupo')
+@Entity({ schema: 'summit', name: 'alumno_grupo' })
 export class AlumnoGrupo {
   @PrimaryGeneratedColumn()
   id: number;

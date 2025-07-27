@@ -1,4 +1,9 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import {
+  Get,
+  Injectable,
+  UnauthorizedException,
+  UseGuards,
+} from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Usuario } from '../entities/usuario.entity';
 import { Repository } from 'typeorm';
@@ -17,6 +22,13 @@ export class UsuariosService {
     return this.usuarioRepo.find();
   }
 
+  async getOne(id: number) {
+    const { password, ...user } = await this.usuarioRepo.findOne({
+      where: { id },
+    });
+    return user;
+  }
+
   async create(createDto: UsuarioCreateDto) {
     const newUsuario = this.usuarioRepo.create(createDto);
     await this.usuarioRepo.save(newUsuario);
@@ -27,8 +39,6 @@ export class UsuariosService {
     const user = await this.usuarioRepo.findOneBy({
       nickname: signInDto.nickname,
     });
-
-    console.log(user);
 
     if (user?.password !== signInDto.password) {
       throw new UnauthorizedException();

@@ -13,7 +13,7 @@ import { TipoAlumno } from './alumno-grupo.entity';
 import { FichaCriterio } from './ficha-criterio.entity';
 import { Evaluacion } from './evaluacion.entity';
 
-@Entity('ficha')
+@Entity('ficha', { schema: 'summit' })
 export class Ficha {
   @PrimaryGeneratedColumn()
   id: number;

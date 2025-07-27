@@ -11,8 +11,9 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Documento } from './documentos.entity';
+import { Temporada } from 'src/malla-curricular/entitties/temporada.entity';
 
-@Entity('proyecto')
+@Entity('proyecto', { schema: 'summit' })
 export class Proyecto {
   @PrimaryGeneratedColumn()
   id: number;
@@ -27,6 +28,13 @@ export class Proyecto {
 
   @Column()
   usuarioId: number;
+
+  @Column()
+  temporadaId: number;
+
+  @ManyToOne(() => Temporada, (temporada) => temporada.proyectos)
+  @JoinColumn({ name: 'temporadaId' })
+  temporada: Temporada;
 
   @Column()
   nombre: string;

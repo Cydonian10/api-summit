@@ -11,7 +11,7 @@ import { Ficha } from './ficha.entity';
 import { Aspecto } from './aspecto.entity';
 import { EvaluacionDetalle } from './evaluacion-detalle.entity';
 
-@Entity('ficha_criterio')
+@Entity({ name: 'ficha_criterio', schema: 'summit' })
 export class FichaCriterio {
   @PrimaryGeneratedColumn()
   id: number;

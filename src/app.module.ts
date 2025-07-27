@@ -5,6 +5,19 @@ import { join } from 'path';
 import { UsuariosService } from './usuarios/services/usuario.service';
 import { UsuariosController } from './usuarios/controllers/usuarios.controllers';
 import { JwtModule } from '@nestjs/jwt';
+import { NivelController } from './malla-curricular/controllers/nivel.controller';
+import { NivelService } from './malla-curricular/services/nivel.service';
+import { CursoController } from './malla-curricular/controllers/curso.controller';
+import { CursoService } from './malla-curricular/services/curso.service';
+import { SeccionController } from './malla-curricular/controllers/seccion.controller';
+import { SeccionService } from './malla-curricular/services/seccion.service';
+import { GradoController } from './malla-curricular/controllers/grado.controller';
+import { GradoService } from './malla-curricular/services/grado.service';
+import { TemporadaController } from './malla-curricular/controllers/temporada.controller';
+import { TemporadaService } from './malla-curricular/services/temporada.service';
+import { AlumnoSeccionService } from './malla-curricular/services/alumno-seccion.service';
+import { AlumnoSeccionController } from './malla-curricular/controllers/alumno-seccion.controller';
+import { JwtStrategy } from './usuarios/guards/jwt-auth.strategy';
 
 const entityFiles = glob.sync(join(__dirname, '**', '*.entity.{ts,js}'));
 const entities = entityFiles.map((file) => require(file));
@@ -31,7 +44,24 @@ const extractedEntities = entities.map((mod) => Object.values(mod)).flat();
       signOptions: { expiresIn: '2d' },
     }),
   ],
-  controllers: [UsuariosController],
-  providers: [UsuariosService],
+  controllers: [
+    UsuariosController,
+    NivelController,
+    CursoController,
+    SeccionController,
+    GradoController,
+    TemporadaController,
+    AlumnoSeccionController,
+  ],
+  providers: [
+    UsuariosService,
+    NivelService,
+    CursoService,
+    SeccionService,
+    GradoService,
+    TemporadaService,
+    AlumnoSeccionService,
+    JwtStrategy,
+  ],
 })
 export class AppModule {}

@@ -1,22 +1,42 @@
-import { Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  Unique,
+} from 'typeorm';
 import { Seccion } from './seccion.entity';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
 import { Temporada } from './temporada.entity';
+import { Grado } from './grado.entity';
 
 @Entity('alumno_seccion')
+@Unique(['seccionId', 'gradoId', 'alumnoId', 'temporadaId'])
 export class AlumnoSeccion {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
   seccionId: number;
 
-  @PrimaryColumn()
+  @Column()
+  gradoId: number;
+
+  @Column()
   alumnoId: number;
 
-  @PrimaryColumn()
+  @Column()
   temporadaId: number;
 
   @ManyToOne(() => Seccion)
   @JoinColumn({ name: 'seccionId' })
   seccion: Seccion;
+
+  @ManyToOne(() => Grado)
+  @JoinColumn({ name: 'gradoId' })
+  grado: Grado;
 
   @ManyToOne(() => Usuario)
   @JoinColumn({ name: 'alumnoId' })

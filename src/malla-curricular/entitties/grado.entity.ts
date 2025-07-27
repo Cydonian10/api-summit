@@ -14,6 +14,7 @@ import { Grupo } from 'src/summit/entities/grupo.entity';
 import { CursoEvaluar } from 'src/summit/entities/curso-evaluar.entity';
 import { Proyecto } from 'src/summit/entities/proyecto.entity';
 import { Ficha } from 'src/summit/entities/ficha.entity';
+import { Curso } from './curso.entity';
 
 @Entity('grado')
 export class Grado {
@@ -23,10 +24,14 @@ export class Grado {
   @Column()
   nombre: string;
 
-  @Column()
-  nivelId: number;
+  @Column({ nullable: true })
+  nivelId: number | null;
 
-  @ManyToOne(() => Nivel, (nivel) => nivel.grados)
+  @ManyToOne(() => Nivel, (nivel) => nivel.grados, {
+    nullable: true,
+    cascade: true,
+    onDelete: 'SET NULL',
+  })
   @JoinColumn({ name: 'nivelId' })
   nivel: Nivel;
 
@@ -36,7 +41,7 @@ export class Grado {
   })
   secciones: Seccion[];
 
-  @ManyToOne(() => Grupo, (grupo) => grupo.grado)
+  @OneToMany(() => Grupo, (grupo) => grupo.grado)
   grupos: Grupo[];
 
   @OneToMany(() => CursoEvaluar, (cursoEvaluar) => cursoEvaluar.grado)
@@ -47,4 +52,10 @@ export class Grado {
 
   @OneToMany(() => Ficha, (ficha) => ficha.nivel)
   fichas: Ficha[];
+
+  @ManyToMany(() => Curso, (curso) => curso.grados)
+  @JoinTable({
+    name: 'grado_curso',
+  })
+  cursos: Curso[];
 }

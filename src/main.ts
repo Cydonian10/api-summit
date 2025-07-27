@@ -5,14 +5,36 @@ import {
   NestFastifyApplication,
 } from '@nestjs/platform-fastify';
 import { ValidationPipe } from '@nestjs/common';
+import 'fastify';
+import cors from '@fastify/cors';
+
+declare module 'fastify' {
+  interface FastifyRequest {
+    user?: any; // aquí puedes reemplazar `any` por un tipo más preciso
+  }
+}
 
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({ logger: true }),
+    new FastifyAdapter({
+      logger: {
+        transport: {
+          target: 'pino-pretty',
+          options: {
+            colorize: true, // colores bonitos
+            translateTime: 'HH:MM:ss Z', // formato de hora
+            ignore: 'pid,hostname', // campos que no quieres ver
+          },
+        },
+      },
+    }),
   );
 
-  app.enableCors();
+  await app.register(cors, {
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({

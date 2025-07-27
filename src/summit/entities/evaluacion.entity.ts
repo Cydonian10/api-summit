@@ -9,7 +9,7 @@ import { AlumnoEvaluar } from './alumno-evaluar.entity';
 import { Ficha } from './ficha.entity';
 import { EvaluacionDetalle } from './evaluacion-detalle.entity';
 
-@Entity('evaluacion')
+@Entity({ schema: 'summit', name: 'evaluacion' })
 export class Evaluacion {
   @PrimaryGeneratedColumn()
   id: number;

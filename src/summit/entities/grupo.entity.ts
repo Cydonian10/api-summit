@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import { AlumnoGrupo } from './alumno-grupo.entity';
 
-@Entity('grupo')
+@Entity('grupo', { schema: 'summit' })
 export class Grupo {
   @PrimaryGeneratedColumn()
   id: number;

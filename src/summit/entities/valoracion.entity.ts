@@ -1,7 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Escala } from './escala.entity';
 
-@Entity('valoracion')
+@Entity('valoracion', { schema: 'summit' })
 export class Valoracion {
   @PrimaryGeneratedColumn()
   id: number;
