@@ -5,6 +5,7 @@ import {
   CreateAlumnoSeccionDto,
   FiltroAlumnoSecionDto,
 } from '../dtos/alumno-seccion.dto';
+import { FiltroCantidadAlumnos } from 'src/summit/dtos/grupo/genera-grupo.dto';
 
 @Controller('alumno-seccion')
 export class AlumnoSeccionController {

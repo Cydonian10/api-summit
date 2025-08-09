@@ -8,6 +8,7 @@ import {
   FiltroAlumnoSecionDto,
 } from '../dtos/alumno-seccion.dto';
 import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { FiltroCantidadAlumnos } from 'src/summit/dtos/grupo/genera-grupo.dto';
 
 @Injectable()
 export class AlumnoSeccionService {

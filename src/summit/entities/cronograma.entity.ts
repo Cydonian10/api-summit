@@ -19,12 +19,15 @@ export class Cronograma {
   inicio: Date;
 
   @Column()
+  fin: Date;
+
+  @Column()
   nombre: string;
 
   @ManyToOne(() => Temporada, (temporada) => temporada.cronogramas)
   temporada: Temporada;
 
-  @OneToMany(() => Fase, (fase) => fase.cronograma)
+  @OneToMany(() => Fase, (fase) => fase.cronograma, { cascade: true })
   fases: Fase[];
 
   @OneToMany(() => CursoEvaluar, (cursoEvaluar) => cursoEvaluar.cronograma)

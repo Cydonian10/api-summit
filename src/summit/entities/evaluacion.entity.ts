@@ -6,7 +6,6 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AlumnoEvaluar } from './alumno-evaluar.entity';
-import { Ficha } from './ficha.entity';
 import { EvaluacionDetalle } from './evaluacion-detalle.entity';
 
 @Entity({ schema: 'summit', name: 'evaluacion' })
@@ -31,9 +30,6 @@ export class Evaluacion {
 
   @ManyToOne(() => AlumnoEvaluar, (alumnoEvaluar) => alumnoEvaluar.evaluaciones)
   alumnoEvaluar: AlumnoEvaluar;
-
-  @ManyToOne(() => Ficha, (ficha) => ficha.evaluaciones)
-  ficha: Ficha;
 
   @OneToMany(
     () => EvaluacionDetalle,

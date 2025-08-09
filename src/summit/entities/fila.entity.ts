@@ -1,44 +1,38 @@
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { Columna } from './columna.entity';
+
+@Entity({ schema: 'summit', name: 'fila' })
 export class Fila {
+  @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
   columnaId: number;
 
+  @ManyToOne(() => Columna, (columna) => columna.filas)
+  columna: Columna;
+
+  @Column()
   nombre: string;
 
+  @Column()
   orden: number;
 
-  filaId: number;
+  @Column({ nullable: true })
+  filaPadreId: number;
 
+  @ManyToOne(() => Fila, (fila) => fila.hijos, { nullable: true })
+  filaPadre: Fila;
+
+  @OneToMany(() => Fila, (fila) => fila.filaPadre)
+  hijos: Fila[];
+
+  @Column({ type: 'enum', enum: ['grupo', 'item'] })
   tipo: 'grupo' | 'item';
 }
-
-// @Entity()
-// export class Fila {
-//   @PrimaryGeneratedColumn()
-//   id: number;
-
-//   @ManyToOne(() => Columna, columna => columna.filas, { onDelete: 'CASCADE' })
-//   @JoinColumn({ name: 'columna_id' })
-//   columna: Columna;
-
-//   @Column()
-//   nombre: string;
-
-//   @Column({ nullable: true })
-//   orden: number;
-
-//   // 🧠 Autorreferencia: una fila puede tener un padre (grupo)
-//   @ManyToOne(() => Fila, fila => fila.hijos, { nullable: true, onDelete: 'SET NULL' })
-//   @JoinColumn({ name: 'padre_id' })
-//   padre: Fila;
-
-//   // 👶 Hijos: otras filas que dependen de esta (si es un grupo)
-//   @OneToMany(() => Fila, fila => fila.padre)
-//   hijos: Fila[];
-
-//   @Column({
-//     type: 'enum',
-//     enum: ['grupo', 'item'],
-//   })
-//   tipo: 'grupo' | 'item';
-// }

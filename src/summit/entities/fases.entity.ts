@@ -15,6 +15,8 @@ export class Fase {
   @Column('date')
   fechaFin: Date;
 
-  @ManyToOne(() => Cronograma)
+  @ManyToOne(() => Cronograma, (cronograma) => cronograma.fases, {
+    onDelete: 'CASCADE',
+  })
   cronograma: Cronograma;
 }

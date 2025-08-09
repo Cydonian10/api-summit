@@ -22,6 +22,8 @@ export class SeccionCursoEvaluacion {
   @ManyToOne(() => Seccion, (seccion) => seccion.seccionesCursosEvaluaciones)
   seccion: Seccion;
 
-  @ManyToOne(() => CursoEvaluar, (ce) => ce.seccionesCursoEvaluacion)
+  @ManyToOne(() => CursoEvaluar, (ce) => ce.seccionesCursoEvaluacion, {
+    onDelete: 'CASCADE',
+  })
   cursoEvaluar: CursoEvaluar;
 }

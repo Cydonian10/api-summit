@@ -7,6 +7,7 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Cronograma } from './cronograma.entity';
 import { Curso } from 'src/malla-curricular/entitties/curso.entity';
@@ -15,6 +16,7 @@ import { SeccionCursoEvaluacion } from './seccion-curso-evalucion.entity';
 import { AlumnoEvaluar } from './alumno-evaluar.entity';
 
 @Entity({ schema: 'summit', name: 'curso_evaluar' })
+@Unique(['gradoId', 'cronogramaId', 'cursoId', 'evaluadorId'])
 export class CursoEvaluar {
   @PrimaryGeneratedColumn()
   id: number;

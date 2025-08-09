@@ -20,7 +20,9 @@ export class AlumnoEvaluar {
   @Column()
   alumnoGrupoId: number;
 
-  @ManyToOne(() => CursoEvaluar)
+  @ManyToOne(() => CursoEvaluar, (curoEvaluar) => curoEvaluar.alumnosEvaluar, {
+    onDelete: 'RESTRICT',
+  })
   cursoEvaluar: CursoEvaluar;
 
   @ManyToOne(() => AlumnoGrupo)

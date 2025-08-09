@@ -5,6 +5,7 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Grupo } from './grupo.entity';
 import { AlumnoEvaluar } from './alumno-evaluar.entity';
@@ -15,6 +16,7 @@ export enum TipoAlumno {
 }
 
 @Entity({ schema: 'summit', name: 'alumno_grupo' })
+@Unique(['alumnoId', 'grupoId'])
 export class AlumnoGrupo {
   @PrimaryGeneratedColumn()
   id: number;

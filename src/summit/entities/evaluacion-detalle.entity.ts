@@ -1,6 +1,6 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
-import { FichaCriterio } from './ficha-criterio.entity';
 import { Evaluacion } from './evaluacion.entity';
+import { Fila } from './fila.entity';
 
 @Entity({ schema: 'summit', name: 'evaluacion_detalle' })
 export class EvaluacionDetalle {
@@ -8,13 +8,16 @@ export class EvaluacionDetalle {
   id: number;
 
   @Column()
-  fichaCriterioId: number;
+  evaluacionId: number;
 
   @Column()
-  evalucionId: number;
+  filaId: number;
 
-  @ManyToOne(() => FichaCriterio)
-  fichaCriterio: FichaCriterio;
+  @ManyToOne(() => Fila)
+  fila: Fila;
+
+  @Column()
+  valor: number;
 
   @ManyToOne(() => Evaluacion)
   evaluacion: Evaluacion;

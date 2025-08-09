@@ -10,7 +10,6 @@ import { Nivel } from 'src/malla-curricular/entitties/nivel.entity';
 import { Grado } from 'src/malla-curricular/entitties/grado.entity';
 import { Escala } from './escala.entity';
 import { TipoAlumno } from './alumno-grupo.entity';
-import { FichaCriterio } from './ficha-criterio.entity';
 import { Evaluacion } from './evaluacion.entity';
 
 @Entity('ficha', { schema: 'summit' })
@@ -47,10 +46,4 @@ export class Ficha {
 
   @ManyToOne(() => Escala, (escala) => escala.fichas)
   escala: Escala;
-
-  @OneToMany(() => FichaCriterio, (fichaCriterio) => fichaCriterio.ficha)
-  fichasCriterios: FichaCriterio[];
-
-  @OneToMany(() => Evaluacion, (evaluacon) => evaluacon.ficha)
-  evaluaciones: Evaluacion[];
 }

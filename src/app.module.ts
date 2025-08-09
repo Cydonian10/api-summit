@@ -18,6 +18,14 @@ import { TemporadaService } from './malla-curricular/services/temporada.service'
 import { AlumnoSeccionService } from './malla-curricular/services/alumno-seccion.service';
 import { AlumnoSeccionController } from './malla-curricular/controllers/alumno-seccion.controller';
 import { JwtStrategy } from './usuarios/guards/jwt-auth.strategy';
+import { GrupoController } from './summit/controllers/grupo.controller';
+import { GrupoService } from './summit/services/grupo.service';
+import { CronogramaController } from './summit/controllers/cronograma.controller';
+import { CronogramaService } from './summit/services/cronograma.service';
+import { CursoEvaluarController } from './summit/controllers/curso-evaluar.controller';
+import { CursoEvaluarService } from './summit/services/curso-evaluar.service';
+import { SeccionCursoEvaluarService } from './summit/services/seccion-curso-evaluar.service';
+import { SeccionCursoEvaluarController } from './summit/controllers/seccion-curso-evaluar.controller';
 
 const entityFiles = glob.sync(join(__dirname, '**', '*.entity.{ts,js}'));
 const entities = entityFiles.map((file) => require(file));
@@ -52,6 +60,10 @@ const extractedEntities = entities.map((mod) => Object.values(mod)).flat();
     GradoController,
     TemporadaController,
     AlumnoSeccionController,
+    GrupoController,
+    CronogramaController,
+    CursoEvaluarController,
+    SeccionCursoEvaluarController,
   ],
   providers: [
     UsuariosService,
@@ -61,7 +73,11 @@ const extractedEntities = entities.map((mod) => Object.values(mod)).flat();
     GradoService,
     TemporadaService,
     AlumnoSeccionService,
+    GrupoService,
     JwtStrategy,
+    CronogramaService,
+    CursoEvaluarService,
+    SeccionCursoEvaluarService,
   ],
 })
 export class AppModule {}

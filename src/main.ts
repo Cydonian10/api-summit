@@ -17,18 +17,7 @@ declare module 'fastify' {
 async function bootstrap() {
   const app = await NestFactory.create<NestFastifyApplication>(
     AppModule,
-    new FastifyAdapter({
-      logger: {
-        transport: {
-          target: 'pino-pretty',
-          options: {
-            colorize: true, // colores bonitos
-            translateTime: 'HH:MM:ss Z', // formato de hora
-            ignore: 'pid,hostname', // campos que no quieres ver
-          },
-        },
-      },
-    }),
+    new FastifyAdapter(),
   );
 
   await app.register(cors, {
@@ -46,3 +35,16 @@ async function bootstrap() {
   await app.listen(3000);
 }
 bootstrap();
+
+// {
+//       logger: {
+//         transport: {
+//           target: 'pino-pretty',
+//           options: {
+//             colorize: true, // colores bonitos
+//             translateTime: 'HH:MM:ss Z', // formato de hora
+//             ignore: 'pid,hostname', // campos que no quieres ver
+//           },
+//         },
+//       },
+//     }
